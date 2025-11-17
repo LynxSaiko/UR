@@ -1,0 +1,55 @@
+import websockets
+import asyncio
+import json
+
+class WebSocketClient:
+    def __init__(self, uri):
+        self.uri = uri
+        self.websocket = None
+
+    async def connect(self):
+        """Menghubungkan ke WebSocket Server."""
+        self.websocket = await websockets.connect(self.uri)
+
+    async def send_command(self, command):
+        """Mengirimkan perintah ke WebSocket Server dan menunggu respons."""
+        if self.websocket:
+            # Kirim perintah ke server WebSocket
+            await self.websocket.send(command)
+            # Menunggu respons dari server WebSocket
+            response = await self.websocket.recv()
+            return response
+        else:
+            print("WebSocket is not connected.")
+            return None
+
+    async def close(self):
+        """Menutup koneksi WebSocket."""
+        if self.websocket:
+            await self.websocket.close()
+            print("WebSocket connection closed.")
+
+
+# Fungsi untuk mengirim perintah dari input GUI ke WebSocket
+def send_session_command(self):
+    """Mengirimkan perintah yang diketik di input ke WebSocket Server."""
+    command = self.session_cmd_input.text().strip()  # Ambil perintah dari input
+    if command:
+        # Hubungkan ke WebSocket server dan kirim perintah
+        ws_client = WebSocketClient("ws://localhost:8765")  # Sesuaikan URI dengan server WebSocket
+
+        async def run():
+            await ws_client.connect()  # Menghubungkan ke server
+            response = await ws_client.send_command(command)  # Mengirim perintah dan menerima respons
+            self.display_response(response)  # Tampilkan respons di GUI
+            await ws_client.close()  # Menutup koneksi setelah selesai
+
+        # Menjalankan event loop untuk WebSocket client
+        asyncio.run(run())
+
+# Fungsi untuk menampilkan respons dari server WebSocket
+def display_response(self, response):
+    """Menampilkan hasil perintah di output area GUI."""
+    if response:
+        self.session_output.append(response)  # Menambahkan respons ke output
+
