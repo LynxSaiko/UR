@@ -747,42 +747,288 @@ class LazyFrameworkGUI(QMainWindow):
         """)
     
     def set_light_theme(self):
-         self.style_sheet = 'light'
-         self.setStyleSheet("""
-             QMainWindow {
-                 background: #ffffff;
-                 color: #000000;
-             }
-             QWidget {
-                 background: #ffffff;
-                 color: #000000;
-             }
-             QPushButton {
-                 background: #f0f0f0;
-                 color: #000000;
-                 border: 1px solid #ccc;
-                 padding: 8px 12px;
-                 border-radius: 4px;
-             
-             }
-             QPushButton:hover {
-                 background: #e0e0e0;
-                 
-             }
-             QLineEdit {
-                 background: #ffffff;
-                 color: red;
-                 padding: 8px;
-                 border-radius: 4px;
-             }
-             
-             QTextEdit {
-                 background: #000;
-                 color: red;
-                 border: 1px solid #ccc;
-                 border-radius: 4px;
-             }
-         """)
+        self.style_sheet = 'light'
+        self.setStyleSheet("""
+            /* MAIN WINDOW */
+            QMainWindow {
+                background: #f8f9fa;
+                color: #2c3e50;
+            }
+            
+            /* GENERAL WIDGETS */
+            QWidget {
+                background: #f8f9fa;
+                color: #2c3e50;
+                border: none;
+            }
+            
+            /* BUTTONS - Professional Blue Theme */
+            QPushButton {
+                background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                    stop:0 #3498db, stop:0.1 #2980b9, stop:0.9 #21618c, stop:1 #1b4f72);
+                color: white;
+                border: 1px solid #1b4f72;
+                padding: 8px 16px;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 12px;
+            }
+            QPushButton:hover {
+                background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                    stop:0 #3cb0fd, stop:1 #3498db);
+                border: 1px solid #2980b9;
+            }
+            QPushButton:pressed {
+                background: #1b4f72;
+            }
+            QPushButton:disabled {
+                background: #bdc3c7;
+                color: #7f8c8d;
+                border: 1px solid #95a5a6;
+            }
+            
+            /* ACTION BUTTONS - Color Coded */
+            QPushButton[action="run"] {
+            background: #21618c;
+            border: 1px solid #2473a6;
+            color: white;
+            }
+            QPushButton[action="run"]:hover {
+                background: #2ecc71;
+            }
+            
+            QPushButton[action="danger"] {
+                background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                    stop:0 #e74c3c, stop:1 #c0392b);
+                border: 1px solid #922b21;
+            }
+            
+            /* INPUT FIELDS */
+            QLineEdit {
+                background: white;
+                color: #2c3e50;
+                border: 1px solid #bdc3c7;
+                padding: 8px;
+                border-radius: 4px;
+                selection-background-color: #3498db;
+            }
+            QLineEdit:focus {
+                border: 2px solid #3498db;
+                background: #fafafa;
+            }
+            QLineEdit:disabled {
+                background: #ecf0f1;
+                color: #7f8c8d;
+            }
+            
+            /* TEXT EDIT / CONSOLE */
+            QTextEdit {
+                background: #2c3e50;
+                color: #ecf0f1;
+                border: 1px solid #34495e;
+                border-radius: 4px;
+                font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+                font-size: 13px;
+            }
+
+            QTextEdit#module_detail_info {
+            font-size: 14px;
+            font-family: 'DejaVu Sans Mono';
+            background: #2c3e50;
+            color: white;
+            }
+            
+            /* LISTS & TABLES */
+            QListWidget, QTableWidget {
+                background: white;
+                color: #2c3e50;
+                border: 1px solid #bdc3c7;
+                border-radius: 4px;
+                outline: none;
+                alternate-background-color: #f8f9fa;
+            }
+            QListWidget::item, QTableWidget::item {
+                font-family: 'Hack';
+                color: #000;
+                padding: 6px;
+                border-bottom: 1px solid #ecf0f1;
+            }
+            QListWidget::item:selected, QTableWidget::item:selected {
+                background: #3498db;
+                color: white;
+                border: none;
+            }
+            QListWidget::item:hover, QTableWidget::item:hover {
+                background: #d6eaf8;
+            }
+            
+            /* HEADERS */
+            QHeaderView::section {
+                background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                    stop:0 #34495e, stop:1 #2c3e50);
+                color: white;
+                padding: 6px;
+                border: none;
+                font-weight: bold;
+            }
+            
+            /* TABS */
+            QTabWidget::pane {
+                border: 1px solid #bdc3c7;
+                background: white;
+                border-radius: 4px;
+            }
+            QTabBar::tab {
+               
+                background: #ecf0f1;
+                color: #2c3e50;
+                padding: 8px 16px;
+                margin-right: 2px;
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+                border: 1px solid #bdc3c7;
+                border-bottom: none;
+            }
+            QTabBar::tab:selected {
+              
+                background: white;
+                color: #3498db;
+                font-weight: bold;
+                border-bottom: 2px solid #3498db;
+            }
+            QTabBar::tab:hover:!selected {
+                background: #d6dbdf;
+            }
+            
+            /* GROUP BOXES */
+            QGroupBox {
+                font-weight: bold;
+                color: #2c3e50;
+                border: 1px solid #bdc3c7;
+                margin-top: 10px;
+                padding-top: 10px;
+                border-radius: 4px;
+                background: white;
+            }
+            QGroupBox::title {
+                subcontrol-origin: margin;
+                left: 10px;
+                padding: 0 8px 0 8px;
+                background: #f8f9fa;
+            }
+            
+            /* LABELS */
+            QLabel {
+                color: #2c3e50;
+            }
+            QLabel[important="true"] {
+                color: #e74c3c;
+                font-weight: bold;
+            }
+            QLabel[success="true"] {
+                color: #27ae60;
+                font-weight: bold;
+            }
+            
+            /* PROGRESS BARS */
+            QProgressBar {
+                border: 1px solid #bdc3c7;
+                border-radius: 4px;
+                background: white;
+                text-align: center;
+                color: #2c3e50;
+            }
+            QProgressBar::chunk {
+                background: qlineargradient(x1:0, y1:0, x2:0, y2:1,
+                    stop:0 #3498db, stop:1 #2980b9);
+                border-radius: 3px;
+            }
+            
+            /* COMBO BOXES */
+            QComboBox {
+                background: white;
+                color: #2c3e50;
+                border: 1px solid #bdc3c7;
+                padding: 6px;
+                border-radius: 4px;
+                min-width: 6em;
+            }
+            QComboBox:hover {
+                border: 1px solid #3498db;
+            }
+            QComboBox::drop-down {
+                border: none;
+                width: 20px;
+            }
+            QComboBox::down-arrow {
+                image: none;
+                border-left: 5px solid transparent;
+                border-right: 5px solid transparent;
+                border-top: 5px solid #2c3e50;
+                width: 0px;
+                height: 0px;
+            }
+            QComboBox QAbstractItemView {
+                background: white;
+                color: #2c3e50;
+                border: 1px solid #bdc3c7;
+                selection-background-color: #3498db;
+                selection-color: white;
+            }
+            
+            /* SCROLL BARS */
+            QScrollBar:vertical {
+                background: #ecf0f1;
+                width: 15px;
+                margin: 0px;
+            }
+            QScrollBar::handle:vertical {
+                background: #bdc3c7;
+                border-radius: 4px;
+                min-height: 20px;
+            }
+            QScrollBar::handle:vertical:hover {
+                background: #95a5a6;
+            }
+            QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+                border: none;
+                background: none;
+            }
+            
+            /* MENU BAR */
+            QMenuBar {
+                background: #34495e;
+                color: white;
+                border: none;
+            }
+            QMenuBar::item {
+                background: transparent;
+                padding: 4px 10px;
+            }
+            QMenuBar::item:selected {
+                background: #3498db;
+            }
+            QMenu {
+                background: white;
+                border: 1px solid #bdc3c7;
+            }
+            QMenu::item {
+                padding: 4px 20px;
+            }
+            QMenu::item:selected {
+                background: #3498db;
+                color: white;
+            }
+            
+            /* TOOLTIPS */
+            QToolTip {
+                background: #2c3e50;
+                color: white;
+                border: 1px solid #34495e;
+                padding: 4px;
+                border-radius: 2px;
+            }
+        """)
 
     def auto_rotate_proxy(self):
         mode = self.framework.session.get("proxy_mode", "Disabled")
@@ -896,7 +1142,7 @@ class LazyFrameworkGUI(QMainWindow):
         self.module_detail_info.setReadOnly(True)
         self.module_detail_info.setFont(QFont("Hack", 11))
         self.tabs.addTab(self.module_detail_info, "Module Info")
-
+        self.module_detail_info.setObjectName("module_detail_info")
         # TAMBAH TAB SESSION MANAGEMENT
         self.session_tab = QWidget()
         self.session_layout = QVBoxLayout(self.session_tab)
@@ -958,24 +1204,8 @@ class LazyFrameworkGUI(QMainWindow):
         control_layout = QHBoxLayout()
 
         self.run_btn = QPushButton("START")
-        self.run_btn.setStyleSheet("""
-            QPushButton {
-                background: #0e0e0f; 
-                color: white; 
-                font-weight: normal; 
-                font-size: 14px; 
-                padding: 12px;
-                border-radius: 6px;
-                outline: none;
-            }
-            QPushButton:hover {
-                background: #072ff5;
-            }
-            QPushButton:disabled {
-                background: #072ff5;
-                color: #888888;
-            }
-        """)
+        self.run_btn.setProperty("action", "run")
+        
         self.run_btn.clicked.connect(self.run_module)
         self.run_btn.setEnabled(False)
         control_layout.addWidget(self.run_btn)
@@ -2970,7 +3200,7 @@ def run_gui():
     import platform
     
     # Fix environment variables for WebEngine
-    os.environ['QTWEBENGINE_CHROMIUM_FLAGS'] = '--no-sandbox --disable-gpu-sandbox --disable-features=VizDisplayCompositor'
+    os.environ['QTWEBENGINE_CHROMIUM_FLAGS'] = '--no-sandbox --disable-gpu-sandbox'
     os.environ['QT_QPA_PLATFORM'] = 'xcb'
     os.environ['QT_QUICK_BACKEND'] = 'software'
     os.environ["LIBGL_ALWAYS_SOFTWARE"] = "1"
